@@ -61,6 +61,11 @@ See COPYING file or https://www.med.upenn.edu/sbia/software-agreement.html
 #include "fSBRTNoduleDialog.h"
 #include "fSBRTAnalysisDialog.h"
 
+//Book
+#include "itkImage.h"
+#include "itkImageFileWriter.h"
+//EO Book
+
 #include "QVTKOpenGLWidget.h"
 #include <QScopedPointer>
 #include "vtkGenericOpenGLRenderWindow.h"

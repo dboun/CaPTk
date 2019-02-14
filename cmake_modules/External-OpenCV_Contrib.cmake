@@ -1,6 +1,7 @@
 ExternalProject_Add( 
   OpenCV_Contrib
-  URL https://github.com/opencv/opencv_contrib/archive/3.4.5.zip
+  #URL https://github.com/opencv/opencv_contrib/archive/3.4.5.zip
+  URL https://github.com/opencv/opencv_contrib/archive/4.0.1.zip
   SOURCE_DIR OpenCV_Contrib
   UPDATE_COMMAND ""
   PATCH_COMMAND ""

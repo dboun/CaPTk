@@ -8,7 +8,8 @@ SET(CMAKE_CXX_STANDARD_REQUIRED YES)
 ExternalProject_Add( 
   OpenCV
   DEPENDS Eigen
-  URL https://github.com/opencv/opencv/archive/3.4.5.zip
+  #URL https://github.com/opencv/opencv/archive/3.4.5.zip
+  URL https://github.com/opencv/opencv/archive/4.0.1.zip
   #GIT_REPOSITORY ${git_protocol}://github.com/opencv/opencv.git
   #GIT_TAG 3.4.1
   SOURCE_DIR OpenCV-source

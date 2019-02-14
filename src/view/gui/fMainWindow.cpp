@@ -625,7 +625,7 @@ fMainWindow::fMainWindow()
       vectorOfSegmentationApps[i].action->setText("  ITK-SNAP"); //TBD set at source
       connect(vectorOfSegmentationApps[i].action, SIGNAL(triggered()), this, SLOT(ApplicationITKSNAP()));
     }
-    else if (vectorOfSegmentationApps[i].name.find("Geodesic") != std::string::npos)
+    else if (vectorOfSegmentationApps[i].name.find("GeodesicSegmentation") != std::string::npos)
     {
       vectorOfSegmentationApps[i].action->setText("  Geodesic Segmentation"); // TBD set at source
       connect(vectorOfSegmentationApps[i].action, SIGNAL(triggered()), this, SLOT(ApplicationGeodesic()));
@@ -5898,9 +5898,19 @@ void fMainWindow::ApplicationGeodesicTraining()
   
   if (executeResult->ok) {
     LabelsImagePointer labelsRenamedPtr = executeResult->labelsImage; // The result segmantation mask
+    
+    //BOOK
+    typedef  itk::ImageFileWriter< itk::Image<int, 3> > WriterType;
+    WriterType::Pointer writer = WriterType::New();
+    writer->SetFileName("out.nii.gz");
+    writer->SetInput(labelsRenamedPtr);
+    writer->Update();
+    //EO BOOK
+
     typedef itk::CastImageFilter<itk::Image<int,3>, itk::Image<short, 3>> CastFilterType;
     CastFilterType::Pointer castFilter = CastFilterType::New();
     castFilter->SetInput(labelsRenamedPtr);
+    castFilter->Update();
     m_imgGeodesicOut = castFilter->GetOutput();
     ApplicationGeodesicTreshold();
     updateProgress(0, "Geodesic Training Segmentation: Finished");

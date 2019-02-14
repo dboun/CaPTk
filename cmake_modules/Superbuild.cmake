@@ -106,7 +106,8 @@ INCLUDE( ${PROJECT_SOURCE_DIR}/cmake_modules/External-Eigen.cmake )
 #MESSAGE( STATUS "Adding OpenCV_Contrib-3.4.5 ...")
 #INCLUDE( ${PROJECT_SOURCE_DIR}/cmake_modules/External-OpenCV_Contrib.cmake )
 
-MESSAGE( STATUS "Adding OpenCV-3.4.5 ...")
+#MESSAGE( STATUS "Adding OpenCV-3.4.5 ...")
+MESSAGE( STATUS "Adding OpenCV-4.0.1 ...")
 INCLUDE( ${PROJECT_SOURCE_DIR}/cmake_modules/External-OpenCV.cmake )
 
 MESSAGE( STATUS "Adding VTK-8.1.0 ...")
