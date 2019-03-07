@@ -12,15 +12,7 @@ ADD_SUBDIRECTORY(src/IO)
 PROJECT( CaPTk_CBICATK )
 
 FILE( GLOB sources "${PROJECT_SOURCE_DIR}/src/*.*" )
-
-set( CBICA-TK_SOURCES
-${sources}
-${CaPTk_IO_HDRS}
-${CaPTk_IO_SRCS}
-)
-
-
-SET( CBICA-TK_SOURCES CACHE STRING "CBICA Toolkit sources" )
+SET( CBICA-TK_SOURCES ${sources} CACHE STRING "CBICA Toolkit sources" )
 FILE( GLOB_RECURSE YAMLCPP_Headers "${PROJECT_SOURCE_DIR}/../thirdparty/yaml-cpp/includes/*.h")
 FILE( GLOB_RECURSE YAMLCPP_Headers_MORE "${PROJECT_SOURCE_DIR}/../thirdparty/yaml-cpp/src/*.h")
 FILE( GLOB_RECURSE YAMLCPP_Sources "${PROJECT_SOURCE_DIR}/../thirdparty/yaml-cpp/src/*.cpp")
@@ -36,7 +28,6 @@ INCLUDE( ${ITK_USE_FILE} )
 SET( CACHED_INCLUDE_DIRS 
   ${CACHED_INCLUDE_DIRS}
   ${PROJECT_SOURCE_DIR}/src/
-  ${PROJECT_SOURCE_DIR}/src/IO/inc/
   ${PROJECT_SOURCE_DIR}/../thirdparty/
   ${PROJECT_SOURCE_DIR}/../thirdparty/yaml-cpp/include/ 
   CACHE STRING "All include directories" FORCE
@@ -53,7 +44,7 @@ IF(NOT (TARGET ${LIBNAME_CBICATK}))
   
   ADD_LIBRARY(
     ${LIBNAME_CBICATK}
-    ${CBICA-TK_SOURCES}
+    ${sources}
     ${YAMLCPP_Headers}
     ${YAMLCPP_Sources}
   )
@@ -62,7 +53,6 @@ IF(NOT (TARGET ${LIBNAME_CBICATK}))
     ${LIBNAME_CBICATK}
     ${ITK_LIBRARIES}
     CaPTk_IO
-    #CaPTk_IO
   )
   
 ENDIF()
