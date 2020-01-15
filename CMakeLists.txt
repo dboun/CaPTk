@@ -13,7 +13,7 @@ SET( ${PROJECT_NAME}_Variant "Full" ) # the particular variant of CaPTk (Full/Ne
 
 SET( PROJECT_VERSION_MAJOR 1 )
 SET( PROJECT_VERSION_MINOR 7 )
-SET( PROJECT_VERSION_PATCH 5.nonRelease.20200114 )
+SET( PROJECT_VERSION_PATCH 5.nonRelease.20191204 )
 SET( PROJECT_VERSION_TWEAK )
 
 # Configure CCache if available
@@ -171,13 +171,13 @@ IF( NOT BUILD_DOCUMENTATION_ONLY )
   SET( CAPTK_BUILD_OPTION "PACKAGE_PROJECT" CACHE STRING "Toggle between packaging mode (optimized code) or developer mode (provides debugging info)" )
 
   SET_PROPERTY( CACHE CAPTK_BUILD_OPTION PROPERTY STRINGS PACKAGE_PROJECT DEVELOPER_MODE )
-  SET(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build." FORCE)
+  SET(CMAKE_BUILD_TYPE Debug CACHE STRING "Choose the type of build.")
 
   IF( CAPTK_BUILD_OPTION STREQUAL PACKAGE_PROJECT)
 
     SET( CAPTK_PACKAGE_PROJECT ON )
     SET( CAPTK_UPDATE_DOCS ON CACHE BOOL "Copy HTML files to $PROJECT_SOURCE_DIR/docs for git commit" )
-    SET( CMAKE_CONFIGURATION_TYPES "Release" CACHE STRING "Default configuration types" FORCE )
+    SET( CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "Default configuration types" FORCE )
     ADD_DEFINITIONS(-DCAPTK_PACKAGE_PROJECT)
 
     # add a few compiler options for GCC and MSVC
