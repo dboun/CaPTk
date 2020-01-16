@@ -70,14 +70,6 @@
 
 #include <QFile>
 
-// For getting the total amount of installed ram
-#ifdef _WIN32
-#include <windows.h>
-#else
-// For both linux + mac
-#include <unistd.h>
-#endif
-
 // this function calls an external application from CaPTk in the most generic way while waiting for output
 int fMainWindow::startExternalProcess(const QString &application, const QStringList &arguments)
 {
@@ -5420,13 +5412,28 @@ void fMainWindow::openImages(QStringList files, bool callingFromCmd)
 
   /**** Check if the total size of the files is more than a percentage 
    *    of the available memory ****/
-  if (isSizeOfLoadedFilesTooBig(files))
+  if (isSizeOfLoadedFilesTooBig(files, loggerFile))
   {
-    ShowErrorMessage(
-      "The images you are trying to load are too big to be handled by CaPTk given the available memory on the system.", 
-      this
-    );
-    return;
+    QMessageBox msgBox;
+    msgBox.setText("The images you are trying to load are too big to be handled by CaPTk given the available memory on the system.");
+    msgBox.setInformativeText("Do you want to proceed anyway?");
+    msgBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+    msgBox.setDefaultButton(QMessageBox::Cancel);
+    
+    int ret = msgBox.exec();
+    
+    switch (ret) 
+    {
+      case QMessageBox::Ok:
+          // Ok was clicked
+          break;
+      case QMessageBox::Cancel:
+          // Cancel was clicked
+          return;
+      default:
+          // Should never be reached
+          break;
+    }
   }
 
   /**** Image Loading ****/
