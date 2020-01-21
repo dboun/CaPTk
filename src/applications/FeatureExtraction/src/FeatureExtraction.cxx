@@ -25,6 +25,10 @@ See COPYING file or https://www.cbica.upenn.edu/sbia/software/license.html
 //#include "itkDOMNodeXMLWriter.h"
 //#include "itkDOMNode.h"
 
+// Delete these
+#include <cstdlib>
+#include <ctime>
+
 //#include "cbicaITKImageInfo.h"
 
 // stuff used in the program
@@ -458,8 +462,12 @@ int main(int argc, char** argv)
           filter->SetDirectionCollapseToIdentity(); // This is required.
           filter->Update();
 
+          // Delete these
+          srand(time(NULL));
+          int random_number = std::rand();
+          
           auto currentFileBase = cbica::getFilenameBase(image_paths[i]);
-          image_paths[i] = m_tempFolderLocation + currentFileBase + "_2D.nii.gz";
+          image_paths[i] = m_tempFolderLocation + currentFileBase + std::to_string(random_number) + "_2D.nii.gz";
           cbica::WriteImage< ActualImageType >(filter->GetOutput(), image_paths[i]);
         }
         filter->SetInput(cbica::ReadImage< ImageType >(maskfilename));
